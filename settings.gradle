@@ -1,2 +1,2 @@
-include ':app', ':DroidSerialPort'
+include ':app', ':DroidSerialPort', ':Serialportlibrary'
 rootProject.name='DroidSerialPortLib'

@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0.8"
+
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+//    implementation 'com.android.support:appcompat-v7:27.1.1'
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+//apply plugin: 'com.novoda.bintray-release'
+//apply plugin: "guru.stefma.bintrayrelease"
+
+//def siteUrl = 'https://github.com/AIlll/AndroidSerialPort'
+//version = "1.0.5"
+//group = "com.aill"
+//publish {
+//    repoName = 'IOTMaven'
+//    userOrg = 'aill'
+//    groupId = 'com.aill'
+//    artifactId = 'AndroidSerialPort'
+//    publishVersion = '1.0.8'
+//    desc = 'Android Serial Port Android串口通信'
+//    website = siteUrl
+//}
+tasks.withType(Javadoc) {//防止编码问题
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
