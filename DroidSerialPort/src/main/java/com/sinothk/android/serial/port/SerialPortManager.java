@@ -38,6 +38,9 @@ public class SerialPortManager {
         // new File("/dev/ttyS1"), 9600, flags
 
         try {
+            if (devicePath == null || devicePath.length() == 0) {
+                return "devicePath不能为空";
+            }
             serialPort = new SerialPort(new File(devicePath), baudRate, flags);
             return "";
         } catch (IOException e) {
