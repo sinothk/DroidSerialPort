@@ -94,10 +94,14 @@ public class SerialPortFinder {
                 mDevices = new Vector<>();
                 File dev = new File("/dev");
                 File[] files = dev.listFiles();
-                int i;
-                for (i = 0; i < files.length; i++) {
-                    if (files[i].getAbsolutePath().startsWith(mDeviceRoot)) {
-                        mDevices.add(files[i]);
+
+                if (files == null) {
+                    return new Vector<>();
+                }
+
+                for (File file : files) {
+                    if (file.getAbsolutePath().startsWith(mDeviceRoot)) {
+                        mDevices.add(file);
                     }
                 }
             }

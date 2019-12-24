@@ -112,8 +112,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String[] allDevices = SerialPortManager.getAllDevices();
 
                 StringBuilder allDevicesStr = new StringBuilder();
-                for (String allDevice : allDevices) {
-                    allDevicesStr.append(allDevice).append("；");
+                if (allDevices == null || allDevices.length == 0) {
+                    allDevicesStr.append("无设备数据");
+                } else {
+                    for (String allDevice : allDevices) {
+                        allDevicesStr.append(allDevice).append("；");
+                    }
                 }
 
                 String logTxtDevInfo = infoTv.getText().toString() + "\n" + allDevicesStr;
@@ -121,11 +125,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.devPathInfoBtn:
-                String[] allDevicesPath = SerialPortManager.getAllDevicesPath();
+                String[] allDevicesPathArr = SerialPortManager.getAllDevicesPath();
 
                 StringBuilder allDevicesPathStr = new StringBuilder();
-                for (String s : allDevicesPath) {
-                    allDevicesPathStr.append(s).append("；");
+
+                if (allDevicesPathArr == null || allDevicesPathArr.length == 0) {
+                    allDevicesPathStr.append("无设备数据");
+                } else {
+                    for (String s : allDevicesPathArr) {
+                        allDevicesPathStr.append(s).append("；");
+                    }
                 }
 
                 String logTxtDevicesPath = infoTv.getText().toString() + "\n" + allDevicesPathStr;
