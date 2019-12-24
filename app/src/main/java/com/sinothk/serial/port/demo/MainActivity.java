@@ -29,5 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+        String[] allDevices = SerialPortManager.getAllDevices();
+        String[] allDevicesPath = SerialPortManager.getAllDevicesPath();
+        if (allDevices == null) {
+
+        }
     }
 }

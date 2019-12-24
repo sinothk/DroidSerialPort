@@ -1,6 +1,8 @@
 package com.sinothk.android.serial.port;
 
+import com.aill.androidserialport.ByteUtil;
 import com.aill.androidserialport.SerialPort;
+import com.aill.androidserialport.SerialPortFinder;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,8 +34,8 @@ public class SerialPortManager {
 
     public static void send(String dataStr, SerialPortCallback<String> callback) {
         try {
-
-            byte[] data = dataStr.getBytes();
+//            byte[] data = dataStr.getBytes();
+            byte[] data = ByteUtil.hexStringToBytes(dataStr);
 
             //从串口对象中获取输出流
             OutputStream outputStream = serialPort.getOutputStream();
@@ -75,7 +77,8 @@ public class SerialPortManager {
             }
 
             if (buffers != null) {
-                callback.onComplete(200, new String(buffers));
+//                callback.onComplete(200, new String(buffers));
+                callback.onComplete(200, ByteUtil.hexBytesToString(buffers));
             } else {
                 callback.onComplete(201, "数据为空");
             }
@@ -84,4 +87,28 @@ public class SerialPortManager {
             callback.onComplete(0, e.getMessage());
         }
     }
+
+    /**
+     * @return
+     */
+    public static String[] getAllDevices() {
+//        ByteUtil类：工具类，字符串转字节数组，字节数组转字符串
+//        SerialFinder类：用于查找设备下所有串口路径
+        return new SerialPortFinder().getAllDevices();
+    }
+
+    public static String[] getAllDevicesPath() {
+//        ByteUtil类：工具类，字符串转字节数组，字节数组转字符串
+//        SerialFinder类：用于查找设备下所有串口路径
+        return new SerialPortFinder().getAllDevicesPath();
+    }
+
+//    //Original byte[]
+//    byte[] bytes = "hello world".getBytes();
+//    //Base64 Encoded
+//    String encoded = Base64.getEncoder().encodeToString(bytes);
+//    //Base64 Decoded
+//    byte[] decoded = Base64.getDecoder().decode(encoded);
+//    //Verify original content
+//        System.out.println( new String(decoded) );
 }
