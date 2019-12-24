@@ -30,7 +30,4 @@ dependencies {
     // 自定义
     implementation project(path: ':DroidSerialPort')
 
-    // https://codeload.github.com/AIlll/AndroidSerialPort/zip/master
-    // implementation 'com.aill:AndroidSerialPort:1.0.8'
-    implementation project(path: ':Serialportlibrary')
 }

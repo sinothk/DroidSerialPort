@@ -42,7 +42,7 @@ public class SerialPort {
         mSuPath = suPath;
     }
 
-    public SerialPort(File device, int baudrate, int flags) throws SecurityException, IOException {
+    public SerialPort(File device, int baudRate, int flags) throws SecurityException, IOException {
         /* 检查访问权限 */
         if (!device.canRead() || !device.canWrite()) {
             try {
@@ -58,7 +58,7 @@ public class SerialPort {
                 throw new SecurityException();
             }
         }
-        mFd = open(device.getAbsolutePath(), baudrate, flags);
+        mFd = open(device.getAbsolutePath(), baudRate, flags);
         if (mFd == null) {
             Log.i(TAG, "open() return null");
             throw new IOException();
