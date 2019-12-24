@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 StringBuilder allDevicesStr = new StringBuilder();
                 for (String allDevice : allDevices) {
-                    allDevicesStr.append(allDevice);
+                    allDevicesStr.append(allDevice).append("\n");
                 }
 
                 String logTxtDevInfo = infoTv.getText().toString() + "\n" + allDevicesStr;
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 StringBuilder allDevicesPathStr = new StringBuilder();
                 for (String s : allDevicesPath) {
-                    allDevicesPathStr.append(s);
+                    allDevicesPathStr.append(s).append("\n");
                 }
 
                 String logTxtDevicesPath = infoTv.getText().toString() + "\n" + allDevicesPathStr;
