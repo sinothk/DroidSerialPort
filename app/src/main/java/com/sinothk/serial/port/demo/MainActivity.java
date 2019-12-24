@@ -82,9 +82,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.closeBtn:
                 SerialPortManager.close();
+                infoTv.setText("");
 
-                String logTxtClose = infoTv.getText().toString() + "\n" + "关闭";
-                infoTv.setText(logTxtClose);
                 break;
             case R.id.sendDataBtn:
                 String sendMsg = dataEt.getText().toString();
@@ -109,13 +108,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.devInfoBtn:
                 String[] allDevices = SerialPortManager.getAllDevices();
 
-                String logTxtDevInfo = infoTv.getText().toString() + "\n" + allDevices;
+                StringBuilder allDevicesStr = new StringBuilder();
+                for (String allDevice : allDevices) {
+                    allDevicesStr.append(allDevice);
+                }
+
+                String logTxtDevInfo = infoTv.getText().toString() + "\n" + allDevicesStr;
                 infoTv.setText(logTxtDevInfo);
                 break;
 
             case R.id.devPathInfoBtn:
                 String[] allDevicesPath = SerialPortManager.getAllDevicesPath();
-                String logTxtDevicesPath = infoTv.getText().toString() + "\n" + allDevicesPath;
+
+                StringBuilder allDevicesPathStr = new StringBuilder();
+                for (String s : allDevicesPath) {
+                    allDevicesPathStr.append(s);
+                }
+
+                String logTxtDevicesPath = infoTv.getText().toString() + "\n" + allDevicesPathStr;
                 infoTv.setText(logTxtDevicesPath);
                 break;
         }
