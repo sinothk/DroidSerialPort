@@ -56,6 +56,9 @@ public class SerialPortManager {
         try {
             //从串口对象中获取输入流
             InputStream inputStream = serialPort.getInputStream();
+
+            byte[] buffers = null;
+
             //使用循环读取数据，建议放到子线程去
             while (true) {
                 if (inputStream.available() > 0) {
@@ -64,13 +67,18 @@ public class SerialPortManager {
                     //sleep过后，再读取数据，基本上都是完整的数据
                     byte[] buffer = new byte[inputStream.available()];
                     int size = inputStream.read(buffer);
+
+                    buffers = buffer;
                 } else {
                     break;
                 }
             }
 
-            callback.onComplete(200, "操作成功");
-
+            if (buffers != null) {
+                callback.onComplete(200, new String(buffers));
+            } else {
+                callback.onComplete(201, "数据为空");
+            }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             callback.onComplete(0, e.getMessage());
