@@ -44,7 +44,8 @@ public class SerialPortManager {
             serialPort = new SerialPort(new File(devicePath), baudRate, flags);
             return "";
         } catch (IOException e) {
-            return e.getMessage();
+            e.printStackTrace();
+            return "初始化异常";
         }
     }
 
@@ -55,6 +56,11 @@ public class SerialPortManager {
      * @param callback
      */
     public static void send(String dataStr, SerialPortCallback<String> callback) {
+        if (serialPortDisable()) {
+            callback.onComplete(0, "端口未开启");
+            return;
+        }
+
         try {
 //            byte[] data = dataStr.getBytes();
             byte[] data = ByteUtil.hexStringToBytes(dataStr);
@@ -76,12 +82,21 @@ public class SerialPortManager {
         }
     }
 
+    private static boolean serialPortDisable() {
+        return serialPort == null;
+    }
+
     /**
      * 接收数据
      *
      * @param callback
      */
     public static void receive(SerialPortCallback<String> callback) {
+        if (serialPortDisable()) {
+            callback.onComplete(0, "端口未开启");
+            return;
+        }
+
         try {
             //从串口对象中获取输入流
             InputStream inputStream = serialPort.getInputStream();

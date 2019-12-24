@@ -14,8 +14,8 @@ import com.sinothk.android.serial.port.SerialPortManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText devPathEt, baudRateEt, flagsEt, dataEt;
-    private Button initBtn, closeBtn, sendDataBtn, receiveBtn, devInfoBtn, devPathInfoBtn;
+    private EditText devPathEt, baudRateEt, flagsEt, dataEt, suEt;
+    private Button initBtn, closeBtn, sendDataBtn, receiveBtn, devInfoBtn, devPathInfoBtn, setSuBtn;
     private TextView infoTv;
 
     @Override
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
+        suEt = this.findViewById(R.id.suEt);
         devPathEt = this.findViewById(R.id.devPathEt);
         baudRateEt = this.findViewById(R.id.baudRateEt);
         flagsEt = this.findViewById(R.id.flagsEt);
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         infoTv = this.findViewById(R.id.infoTv);
 
+        setSuBtn = this.findViewById(R.id.setSuBtn);
         initBtn = this.findViewById(R.id.initBtn);
         closeBtn = this.findViewById(R.id.closeBtn);
         devInfoBtn = this.findViewById(R.id.devInfoBtn);
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sendDataBtn = this.findViewById(R.id.sendDataBtn);
         receiveBtn = this.findViewById(R.id.receiveBtn);
 
+        setSuBtn.setOnClickListener(this);
         initBtn.setOnClickListener(this);
         closeBtn.setOnClickListener(this);
 
@@ -110,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 StringBuilder allDevicesStr = new StringBuilder();
                 for (String allDevice : allDevices) {
-                    allDevicesStr.append(allDevice).append("\n");
+                    allDevicesStr.append(allDevice).append("；");
                 }
 
                 String logTxtDevInfo = infoTv.getText().toString() + "\n" + allDevicesStr;
@@ -122,11 +125,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 StringBuilder allDevicesPathStr = new StringBuilder();
                 for (String s : allDevicesPath) {
-                    allDevicesPathStr.append(s).append("\n");
+                    allDevicesPathStr.append(s).append("；");
                 }
 
                 String logTxtDevicesPath = infoTv.getText().toString() + "\n" + allDevicesPathStr;
                 infoTv.setText(logTxtDevicesPath);
+                break;
+
+            case R.id.setSuBtn:
+                String suPath = suEt.getText().toString();
+                SerialPortManager.setSuPath(suPath);
                 break;
         }
     }
