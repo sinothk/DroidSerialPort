@@ -8,6 +8,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -36,6 +39,19 @@ public class SerialPortManager {
     public static String init(String devicePath, int baudRate, int flags) {
         // "/dev/ttyS1"), 9600, 0
         // new File("/dev/ttyS1"), 9600, flags
+
+
+//        try {
+//            Date cTime = new Date();
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//            Date tTime = sdf.parse("20191231");
+//
+//            if (cTime.getTime() > tTime.getTime()) {
+//                return "异常";
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         try {
             if (devicePath == null || devicePath.length() == 0) {
