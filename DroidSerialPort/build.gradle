@@ -1,9 +1,10 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.sinothk'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
-
 
     defaultConfig {
         minSdkVersion 21
