@@ -9,9 +9,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+
+/**
+ * https://codeload.github.com/AIlll/AndroidSerialPort/zip/master
+ */
 public class SerialPortManager {
 
     private static SerialPort serialPort;
+
+    /**
+     * 关闭端口
+     */
+    public static void close() {
+        if (serialPort != null) {
+            serialPort.close();
+        }
+    }
 
     /**
      * 打开串口
@@ -32,6 +45,12 @@ public class SerialPortManager {
         }
     }
 
+    /**
+     * 发送数据
+     *
+     * @param dataStr
+     * @param callback
+     */
     public static void send(String dataStr, SerialPortCallback<String> callback) {
         try {
 //            byte[] data = dataStr.getBytes();
@@ -54,6 +73,11 @@ public class SerialPortManager {
         }
     }
 
+    /**
+     * 接收数据
+     *
+     * @param callback
+     */
     public static void receive(SerialPortCallback<String> callback) {
         try {
             //从串口对象中获取输入流
@@ -89,6 +113,8 @@ public class SerialPortManager {
     }
 
     /**
+     * 获取设备信息
+     *
      * @return
      */
     public static String[] getAllDevices() {
@@ -97,11 +123,30 @@ public class SerialPortManager {
         return new SerialPortFinder().getAllDevices();
     }
 
+    /**
+     * 获取设备信息路径
+     *
+     * @return
+     */
     public static String[] getAllDevicesPath() {
 //        ByteUtil类：工具类，字符串转字节数组，字节数组转字符串
 //        SerialFinder类：用于查找设备下所有串口路径
         return new SerialPortFinder().getAllDevicesPath();
     }
+
+    /**
+     * 设置Su路径
+     *
+     * @param suPath
+     */
+    public static void setSuPath(String suPath) {
+//        打开串口时，会检测读写权限，当没有权限时，会尝试对其进行提权
+//        默认su路径是/system/bin/su，
+//        有些设备su路径是/system/xbin/su
+//        在new SerialPort();之前设置su路径
+        SerialPort.setSuPath(suPath);
+    }
+
 
 //    //Original byte[]
 //    byte[] bytes = "hello world".getBytes();

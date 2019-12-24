@@ -36,5 +36,9 @@ public class MainActivity extends AppCompatActivity {
         if (allDevices == null) {
 
         }
+
+//        SerialPortManager.setSuPath("");
+
+        SerialPortManager.close();
     }
 }
